@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("/customers")
 class CustomerController(
     val customerService: CustomerService
 ){
@@ -39,14 +39,13 @@ class CustomerController(
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update(@PathVariable id: Int, @RequestBody customer: PutCustomerRequest){
         customerService.update(customer.toCustomerModel(id))
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int){
         customerService.delete(id)
     }
+
 }
