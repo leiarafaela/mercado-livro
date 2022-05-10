@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/books")
-class BookController (
+class BookController(
     val bookService: BookService,
     val customerService: CustomerService
-){
+) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: PostBookRequest){
-        val customer = customerService.getById(request.customerId)
+    fun create(@RequestBody request: PostBookRequest) {
+        val customer = customerService.findById(request.customerId)
         bookService.create(request.toBookModel(customer))
     }
 
@@ -38,13 +38,13 @@ class BookController (
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Int){
+    fun delete(@PathVariable id: Int) {
         bookService.delete(id)
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Int, @RequestBody book: PutBookRequest){
-        val bookSaved =bookService.findById(id)
+    fun update(@PathVariable id: Int, @RequestBody book: PutBookRequest) {
+        val bookSaved = bookService.findById(id)
         bookService.update(book.toBookModel(bookSaved))
     }
 }

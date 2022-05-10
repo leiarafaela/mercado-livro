@@ -3,7 +3,7 @@ package com.mercadolivro.controller.request
 import com.fasterxml.jackson.annotation.JsonAlias
 import java.math.BigDecimal
 
-data class PostBookRequest (
+data class PostBookRequest(
     var name: String,
 
     var price: BigDecimal,
@@ -11,4 +11,3 @@ data class PostBookRequest (
     @JsonAlias("customer_id")
     var customerId: Int
 )
-
